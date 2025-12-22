@@ -4,9 +4,9 @@ public class Main {
         University myUni = new University("Astana IT University", "Astana");
         myUni.displayWelcome();
 
-        Professor prof1 = new Professor("Иван Иванов", "PhD", "Computer Science");
-        Professor prof2 = new Professor("Иван Иванов", "PhD", "Mathematics");
-        Professor prof3 = new Professor("Аскар Смаков", "Master", "Physics");
+        Professor prof1 = new Professor("George Washington", "PhD", "Computer Science");
+        Professor prof2 = new Professor("George Washington", "PhD", "Mathematics");
+        Professor prof3 = new Professor("Adolf Hitler", "Master", "Physics");
 
         Course javaCourse = new Course("Java Programming", 5);
 
@@ -14,17 +14,17 @@ public class Main {
         System.out.println(prof3.getInfo());
         System.out.println(javaCourse.toString());
 
-        System.out.println("\n--- Сравнение профессоров ---");
+        System.out.println("\nComparison of professors");
         if (prof1.equals(prof2)) {
-            System.out.println("Профессор 1 и Профессор 2 идентичны (по имени и степени).");
+            System.out.println("Professor 1 and Professor 2 are identical.");
         } else {
-            System.out.println("Профессора разные.");
+            System.out.println("Professors are different.");
         }
 
         if (prof1.equals(prof3)) {
-            System.out.println("Профессор 1 и Профессор 3 идентичны.");
+            System.out.println("Professor 1 and Professor 3 are identical.");
         } else {
-            System.out.println("Профессор 1 и Профессор 3 — это разные люди.");
+            System.out.println("Professor 1 and Professor 3 are different people.");
         }
     }
 }
