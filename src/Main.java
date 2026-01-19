@@ -1,6 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        // Создание объектов университета [cite: 9]
         University myUni = new University("Astana IT University", "Astana");
         myUni.displayWelcome();
 

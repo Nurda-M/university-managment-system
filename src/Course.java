@@ -12,5 +12,8 @@ public class Course {
 
     public int getCredits() { return credits; }
     public void setCredits(int credits) { this.credits = credits; }
+    public String toString() {
+        return "Course Title: " + title + " | Credits: " + credits;
 
+    }
 }
