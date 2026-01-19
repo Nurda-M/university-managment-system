@@ -1,30 +1,51 @@
+package src;
+
+import java.util.Comparator;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        // Создание объектов университета [cite: 9]
-        University myUni = new University("Astana IT University", "Astana");
-        myUni.displayWelcome();
+        // Create pools
+        DataPool<Student> studentPool = new DataPool<>();
+        DataPool<Professor> professorPool = new DataPool<>();
+        DataPool<Course> coursePool = new DataPool<>();
 
-        Professor prof1 = new Professor("George Washington", "PhD", "Computer Science");
-        Professor prof2 = new Professor("George Washington", "PhD", "Mathematics");
-        Professor prof3 = new Professor("Adolf Hitler", "Master", "Physics");
+        // Courses
+        Course math = new Course("C101", "Mathematics", 5);
+        Course prog = new Course("C102", "Programming", 6);
+        coursePool.add(math);
+        coursePool.add(prog);
 
-        Course javaCourse = new Course("Java Programming", 5);
+        // Students
+        Student s1 = new Student("S001", "Alice", 2);
+        s1.enroll(math);
+        s1.enroll(prog);
 
-        System.out.println(prof1.getInfo());
-        System.out.println(prof3.getInfo());
-        System.out.println(javaCourse.toString());
+        Student s2 = new Student("S002", "Bob", 1);
+        s2.enroll(prog);
 
-        System.out.println("\nComparison of professors");
-        if (prof1.equals(prof2)) {
-            System.out.println("Professor 1 and Professor 2 are identical.");
-        } else {
-            System.out.println("Professors are different.");
-        }
+        studentPool.add(s1);
+        studentPool.add(s2);
 
-        if (prof1.equals(prof3)) {
-            System.out.println("Professor 1 and Professor 3 are identical.");
-        } else {
-            System.out.println("Professor 1 and Professor 3 are different people.");
-        }
+        // Professors
+        Professor p1 = new Professor("P001", "Dr. Ivanov", "PhD", "Mathematics");
+        Professor p2 = new Professor("P002", "Dr. Petrov", "PhD", "Computer Science");
+        professorPool.add(p1);
+        professorPool.add(p2);
+
+        // Filtering: students enrolled in Programming
+        List<Student> progStudents = studentPool.filter(s -> s.getCourses().stream().anyMatch(c -> c.getId().equals("C102")));
+        System.out.println("Students in Programming: " + progStudents);
+
+        // Searching: find professor by department
+        List<Professor> csProfessors = professorPool.search(p -> "Computer Science".equals(p.getDepartment()));
+        System.out.println("CS Professors: " + csProfessors);
+
+        // Sorting: students by name ascending
+        List<Student> sortedStudents = studentPool.sort(Comparator.comparing(Student::getName), true);
+        System.out.println("All students sorted by name: " + sortedStudents);
+
+        // Demonstrating findById
+        studentPool.findById("S001").ifPresent(s -> System.out.println("Found student S001: " + s.getSummary()));
     }
 }
