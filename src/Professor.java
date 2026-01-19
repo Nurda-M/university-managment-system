@@ -1,5 +1,3 @@
-package src;
-
 import java.util.Objects;
 
 public class Professor extends Person {
@@ -18,12 +16,11 @@ public class Professor extends Person {
     public String getDepartment() { return department; }
     public void setDepartment(String department) { this.department = department; }
 
-    @Override
+
     public String getSummary() {
         return "Профессор: " + getName() + ", Степень: " + degree + ", Кафедра: " + department;
     }
 
-    // Сохраняем совместимость с предыдущим кодом
     public String getInfo() {
         return getSummary();
     }
@@ -36,7 +33,7 @@ public class Professor extends Person {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Professor)) return false;
-        return super.equals(o); // равенство по id
+        return super.equals(o);
     }
 
     @Override
