@@ -1,5 +1,3 @@
-package src;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +15,7 @@ public class Student extends Person {
     public void setYear(int year) { this.year = year; }
 
     public List<Course> getCourses() {
-        return new ArrayList<>(courses); // защитная копия (инкапсуляция)
+        return new ArrayList<>(courses); 
     }
 
     public void enroll(Course course) {
@@ -42,7 +40,7 @@ public class Student extends Person {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Student)) return false;
-        return super.equals(o); // equals по id через Person
+        return super.equals(o);
     }
 
     @Override
