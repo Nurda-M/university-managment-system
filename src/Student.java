@@ -27,23 +27,19 @@ public class Student extends Person {
         courses.remove(course);
     }
 
-    @Override
     public String getSummary() {
         return "Student: " + getName() + " (Year " + year + "), courses=" + courses.size();
     }
 
-    @Override
     public String toString() {
         return "Student{id='" + getId() + "', name='" + getName() + "', year=" + year + ", courses=" + courses + "}";
     }
 
-    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Student)) return false;
         return super.equals(o);
     }
 
-    @Override
     public int hashCode() {
         return super.hashCode();
     }
