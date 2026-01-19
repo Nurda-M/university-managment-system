@@ -21,12 +21,10 @@ public class Course {
     public int getCredits() { return credits; }
     public void setCredits(int credits) { this.credits = credits; }
 
-    @Override
     public String toString() {
         return "Course{id='" + id + "', title='" + title + "', credits=" + credits + "}";
     }
 
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -35,7 +33,6 @@ public class Course {
         return id.equals(course.id);
     }
 
-    @Override
     public int hashCode() {
         return Objects.hash(id);
     }
