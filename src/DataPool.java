@@ -1,20 +1,7 @@
-package src;
-
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/**
- * Generic data pool that encapsulates storage and provides operations:
- * - add/remove
- * - listAll
- * - findById
- * - filter (Predicate)
- * - search (Predicate alias)
- * - sort (Comparator)
- *
- * This class follows data abstraction: internal list is private and callers receive copies.
- */
 public class DataPool<T extends Identifiable> {
     private final List<T> items = new ArrayList<>();
 
@@ -34,14 +21,13 @@ public class DataPool<T extends Identifiable> {
     }
 
     public List<T> listAll() {
-        return new ArrayList<>(items); // defensive copy
+        return new ArrayList<>(items);
     }
 
     public List<T> filter(Predicate<T> predicate) {
         return items.stream().filter(predicate).collect(Collectors.toList());
     }
 
-    // search is an alias for filter to reflect different intent
     public List<T> search(Predicate<T> predicate) {
         return filter(predicate);
     }
