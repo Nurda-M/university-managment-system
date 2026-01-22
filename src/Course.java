@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Course {
+public class Course implements Identifiable{
     private final String id;
     private String title;
     private int credits;
