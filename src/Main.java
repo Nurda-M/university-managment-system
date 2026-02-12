@@ -1,5 +1,7 @@
+import java.sql.*;
 import java.util.Comparator;
 import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -37,5 +39,35 @@ public class Main {
         System.out.println("All students sorted by name: " + sortedStudents);
 
         studentPool.findById("S001").ifPresent(s -> System.out.println("Found student S001: " + s.getSummary()));
+
+
+        String url = "jdbc:postgresql://localhost:5432/postgres";
+        String user = "postgres";
+        String password = "nurda0511";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            Statement st = conn.createStatement();
+
+            st.executeUpdate("INSERT INTO students (name) VALUES ('Ivan')");
+            System.out.println(" Записали Ивана в базу");
+
+            ResultSet rs = st.executeQuery("SELECT * FROM students");
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + ", Имя: " + rs.getString("name"));
+            }
+
+            st.executeUpdate("UPDATE students SET name = 'Nurdaulet_Pro' WHERE name = 'Nurdaulet'");
+            System.out.println("Обновили");
+
+            st.executeUpdate("DELETE FROM students WHERE name = 'Ivan'");
+            System.out.println("Удалили");
+
+        } catch (SQLException e) {
+            System.out.println(" Ошибка: " + e.getMessage());
+        }
+
+
     }
 }
+
+

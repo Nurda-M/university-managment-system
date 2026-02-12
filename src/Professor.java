@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Professor extends Person {
     private String degree;
     private String department;
