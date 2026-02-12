@@ -1,10 +1,26 @@
-import java.util.Objects;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.util.Objects;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "courses")
 
 public class Course implements Identifiable{
-    private final String id;
+
+
+    private String name;
+    @Id
+    private String id;
     private String title;
     private int credits;
+
+
+    public Course() {}
 
     public Course(String id, String title, int credits) {
         this.id = Objects.requireNonNull(id, "id must not be null");

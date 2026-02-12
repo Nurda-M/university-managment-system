@@ -1,10 +1,19 @@
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import java.sql.*;
 import java.util.Comparator;
 import java.util.List;
 
-
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        // 1. Запуск Spring Boot сервера для REST API
+        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+
+        System.out.println("--- СЕРВЕР ЗАПУЩЕН, НАЧИНАЮ ВЫПОЛНЕНИЕ ЛОГИКИ ---");
+
+        // --- ТВОЙ СТАРЫЙ КОД (DataPool и Логика) ---
         DataPool<Student> studentPool = new DataPool<>();
         DataPool<Professor> professorPool = new DataPool<>();
         DataPool<Course> coursePool = new DataPool<>();
@@ -40,13 +49,16 @@ public class Main {
 
         studentPool.findById("S001").ifPresent(s -> System.out.println("Found student S001: " + s.getSummary()));
 
-
+        // --- ТВОЙ JDBC КОД ---
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
         String password = "nurda0511";
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             Statement st = conn.createStatement();
+
+            // Создаем таблицу студентов, если её нет (чтобы не было ошибок)
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS students (id SERIAL PRIMARY KEY, name VARCHAR(100))");
 
             st.executeUpdate("INSERT INTO students (name) VALUES ('Ivan')");
             System.out.println(" Записали Ивана в базу");
@@ -63,11 +75,9 @@ public class Main {
             System.out.println("Удалили");
 
         } catch (SQLException e) {
-            System.out.println(" Ошибка: " + e.getMessage());
+            System.out.println(" Ошибка базы данных: " + e.getMessage());
         }
 
-
+        System.out.println("--- ЛОГИКА ВЫПОЛНЕНА, СЕРВЕР ДОСТУПЕН ПО АДРЕСУ http://localhost:8080 ---");
     }
 }
-
-

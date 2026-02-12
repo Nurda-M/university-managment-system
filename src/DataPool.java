@@ -41,9 +41,4 @@ public class DataPool<T extends Identifiable> {
         return items.size();
     }
 
-
-    public T getByIdOrThrow(String id) {
-        return findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Object with ID " + id + " was not found in the pool."));
-    }
 }
